@@ -26,7 +26,8 @@ public:
 	};
 
 
-	Fase(std::string name, const SpriteBase &bkg) : name(name),background(bkg.copia()) {}
+	Fase(std::string name, const Sprite &bkg) : name(name),background(new Sprite(bkg)) {}
+	Fase(std::string name, const SpriteAnimado &bkg) : name(name),background(new SpriteAnimado(bkg)) {}
 	virtual ~Fase();
 	
 	Fase(const Fase &f);

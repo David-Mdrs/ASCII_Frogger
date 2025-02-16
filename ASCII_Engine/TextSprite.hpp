@@ -16,7 +16,7 @@ public:
 	
 	//SpriteBase
 	virtual void putAt(const SpriteBase &, int = 0, int = 0);
-	virtual SpriteBase *copia() const { return new TextSprite(*this);}
+	virtual std::string whoami() const {return "TextSprite";}
 	
 	//RenderBase
 	virtual void init() {};
