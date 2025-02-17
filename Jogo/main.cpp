@@ -8,20 +8,24 @@
 #include "../ASCII_Engine/ObjetoDeJogo.hpp"
 
 #include "Movimentavel.hpp"
+#include "Caminhao.hpp"
+#include "Trem.hpp"
 
 int main() {
 
 	system("clear");
 
-	SpriteBuffer screen(80, 40);
+	SpriteBuffer screen(160, 40);
 
 	ObjetoDeJogo background("background", Sprite("rsc/Fase1.txt"), 0, 0);
 
-	ObjetoDeJogo sapo("sapo", SpriteAnimado("rsc/Sapo.anm", 1, COR::VERDE), 34, 38); 
+	ObjetoDeJogo sapo("sapo", SpriteAnimado("rsc/Sapo.anm", 1, COR::VERDE), 34, 38);
 
-	ObjetoDeJogo carro("carro", SpriteAnimado("rsc/CarroDir.anm", 1, COR::VERDE), 24, 20); 
+	Movimentavel pocante(ObjetoDeJogo("pocante", SpriteAnimado("rsc/CarroDir.anm", 1, COR::VERDE), 30, 20), DIREITA);
 
-	// Movimentavel carro(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 1, COR::AZUL), 15, 2), DIREITA);
+	Caminhao caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 1, COR::MAGENTA), 10, 0), DIREITA);
+
+	Trem trem(ObjetoDeJogo("trem", SpriteAnimado("rsc/Trem.anm", 1, COR::CIANO), 15, 0), DIREITA);
 
 	// SpriteAnimado trem("rsc/Trem.anm", 1, COR::CIANO);
 	// Game::run();
@@ -43,16 +47,18 @@ int main() {
 		else if(str == "d")
 			sapo.moveRight(2);
 
-		//carro.movimentar();
+		pocante.movimentar();
+		caminhao.movimentar();
+		trem.movimentar();
 
 		background.update();		
 		sapo.update();
-		carro.update();	
 
 		background.draw(screen, background.getPosL(), background.getPosC());
 		sapo.draw(screen, sapo.getPosL(), sapo.getPosC());
-		carro.draw(screen, carro.getPosL(), carro.getPosC());
-
+		pocante.draw(screen, pocante.getPosL(), pocante.getPosC());
+		caminhao.draw(screen, caminhao.getPosL(), caminhao.getPosC());
+		trem.draw(screen, trem.getPosL(), trem.getPosC());
 
 		std::cout << screen << std::endl;
 	}
