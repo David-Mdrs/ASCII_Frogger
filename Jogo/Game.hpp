@@ -2,44 +2,41 @@
 #define GAME_HPP
 
 #include "FaseLevel1.hpp"
-#include "FaseStart.hpp"
-#include "FaseFinal.hpp"
+// #include "FaseStart.hpp"
+// #include "FaseFinal.hpp"
 #include "../ASCII_Engine/Sprite.hpp"
 #include "../ASCII_Engine/SpriteAnimado.hpp"
 #include "../ASCII_Engine/Cores.hpp"
 
-class Game
-{
+class Game {
 public:
-	Game(){}
-	~Game(){}
+	Game() {}
+	~Game() {}
 	
-	static void run()
-	{
-		SpriteBuffer buffer(250,57);
+	static void run() {
+		SpriteBuffer screen(161, 40);
+
 	
-		FaseStart start("FaseStart",SpriteAnimado("rsc/castleMedieval.anm",3,COR::VERMELHA));
-		FaseLevel1 fase1("Fase1",Sprite("rsc/fase2.img",COR::VERMELHA));
-		FaseFinal faseFinal("Fase1",Sprite("rsc/title1Gothic.img"));
+		// FaseStart start("FaseStart",SpriteAnimado("rsc/castleMedieval.anm",3,COR::VERMELHA));
+		FaseLevel1 fase1("Fase1",Sprite("rsc/Fase1/Fase1_Background.txt",COR::VERMELHA));
+		// FaseFinal faseFinal("Fase1",Sprite("rsc/title1Gothic.img"));
 		
 		// start.init();
-		// start.run(buffer);
+		// start.run(screen);
 		
-		buffer.clear();
+		screen.clear();
 		fase1.init();
-		int ret1 = fase1.run(buffer);
-		if ( ret1 != Fase::GAME_OVER && ret1 != Fase::END_GAME){
-		
-			buffer.clear();
-			faseFinal.init();
-			faseFinal.run(buffer);
-		}
-		else
+		int ret1 = fase1.run(screen);
+		if ( ret1 != Fase::GAME_OVER && ret1 != Fase::END_GAME) {
+			screen.clear();
+			std::cout << "Fim de jogo..." << std::endl;
+			// faseFinal.init();
+			// faseFinal.run(screen);
+		} else {
 			std::cout << "GAME OVER" << std::endl;
-		
+		}
 		std::cout << "Saindo..." << std::endl;
 	}
-
 };
 
 #endif // GAME_HPP

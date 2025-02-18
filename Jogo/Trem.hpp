@@ -15,7 +15,6 @@ public:
     void setVelocidade(const int velocidade) { m_velocidade = velocidade; }
 
     void movimentar() override {
-        this->update();
         if(getDirecao() == ESQUERDA) {
             this->moveLeft(getVelocidade());
         } else {
