@@ -15,22 +15,25 @@ int main() {
 
 	system("clear");
 
-	SpriteBuffer screen(160, 40);
+	SpriteBuffer screen(161, 40);
 
-	ObjetoDeJogo background("background", Sprite("rsc/Fase1.txt"), 0, 0);
+	ObjetoDeJogo parede("parede", Sprite("rsc/Fase1/Fase1_Parede.txt", COR::BRANCA), 0, 0);
+	ObjetoDeJogo agua("agua", Sprite("rsc/Fase1/Fase1_Agua.txt", COR::CIANO), 20, 3);
+	ObjetoDeJogo aguaMenor("aguaMenor", Sprite("rsc/Fase1/Fase1_Agua_Menor.txt", COR::CIANO), 10, 3);
+	ObjetoDeJogo asfalto("rodovia", Sprite("rsc/Fase1/Fase1_Asfalto.txt", COR::CINZA), 24, 0);
+	ObjetoDeJogo faixa("faixa", Sprite("rsc/Fase1/Fase1_Faixa.txt", COR::AMARELA), 24, 0);
 
-	ObjetoDeJogo sapo("sapo", SpriteAnimado("rsc/Sapo.anm", 1, COR::VERDE), 34, 38);
 
-	Movimentavel pocante(ObjetoDeJogo("pocante", SpriteAnimado("rsc/CarroDir.anm", 1, COR::VERDE), 30, 20), DIREITA);
+	ObjetoDeJogo sapo("sapo", SpriteAnimado("rsc/Sapo.anm", 1, COR::VERDE), 31, 38);
 
-	Caminhao caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 1, COR::MAGENTA), 10, 0), DIREITA);
+	Movimentavel pocante(ObjetoDeJogo("pocante", SpriteAnimado("rsc/CarroDir.anm", 1, COR::VERMELHA), 31, 20), DIREITA);
 
-	Trem trem(ObjetoDeJogo("trem", SpriteAnimado("rsc/Trem.anm", 1, COR::CIANO), 15, 0), DIREITA);
+	Caminhao caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 1, COR::BORDO), 24, 2), DIREITA);
 
-	// SpriteAnimado trem("rsc/Trem.anm", 1, COR::CIANO);
 	// Game::run();
 
 	std::string str;
+	int posAgua{18};
 
 	while(true) {
 		getline(std::cin, str);
@@ -47,18 +50,29 @@ int main() {
 		else if(str == "d")
 			sapo.moveRight(2);
 
+		parede.update();		
+		agua.update();
+		aguaMenor.update();		
+		asfalto.update();
+		faixa.update();
+		
+		sapo.update();
 		pocante.movimentar();
 		caminhao.movimentar();
-		trem.movimentar();
 
-		background.update();		
-		sapo.update();
+		parede.draw(screen, parede.getPosL(), parede.getPosC());
+		asfalto.draw(screen, asfalto.getPosL(), asfalto.getPosC());
+		faixa.draw(screen, faixa.getPosL(), faixa.getPosC());
 
-		background.draw(screen, background.getPosL(), background.getPosC());
+
+		agua.draw(screen, agua.getPosL(), agua.getPosC());
+		for(int i = 0; i < 6; i++) {
+			aguaMenor.draw(screen, aguaMenor.getPosL(), aguaMenor.getPosC() + 29 * i);
+		}
+
 		sapo.draw(screen, sapo.getPosL(), sapo.getPosC());
 		pocante.draw(screen, pocante.getPosL(), pocante.getPosC());
 		caminhao.draw(screen, caminhao.getPosL(), caminhao.getPosC());
-		trem.draw(screen, trem.getPosL(), trem.getPosC());
 
 		std::cout << screen << std::endl;
 	}

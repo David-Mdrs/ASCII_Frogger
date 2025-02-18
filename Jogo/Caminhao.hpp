@@ -24,7 +24,7 @@ public:
 
         if(getAtivo()) {
             setVelocidade(getVelocidade() + 1);
-            if(getVelocidade() == 5) { setAtivo(false); }
+            if(getVelocidade() == 8) { setAtivo(false); }
         } else {
             setVelocidade(getVelocidade() - 1);
             if(getVelocidade() == 0) { setAtivo(true); }
