@@ -25,6 +25,9 @@ namespace COR
 	
 	
 	//declare mais cores aqui...
+	extern const char *const LARANJA;
+	extern const char *const BORDO;
+	extern const char *const VERDE_FLUORESCENTE;
 }
 
 #endif // CORES_HPP
