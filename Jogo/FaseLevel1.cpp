@@ -8,21 +8,29 @@
 void FaseLevel1::init() {
 
 	// Objetos de jogo apenas visuais
-	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Fase1/Fase1_Parede.txt", COR::BRANCA), 0, 0));
+	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Fase1/Fase1_Background.txt", COR::VERDE), 0, 0));
 	objs.push_back(new ObjetoDeJogo("agua", Sprite("rsc/Fase1/Fase1_Agua.txt", COR::CIANO), 20, 3));
-	objs.push_back(new ObjetoDeJogo("aguaMenor", Sprite("rsc/Fase1/Fase1_Agua_Menor.txt", COR::CIANO), 10, 3));
-	objs.push_back(new ObjetoDeJogo("rodovia", Sprite("rsc/Fase1/Fase1_Asfalto.txt", COR::CINZA_ESCURA), 24, 0));
+	for(int i = 0; i < 6; i++) {
+		objs.push_back(new ObjetoDeJogo("aguaMenor", Sprite("rsc/Fase1/Fase1_Agua_Menor.txt", COR::CIANO), 10, 3 + 29 * i));
+	}
+	objs.push_back(new ObjetoDeJogo("rodovia", Sprite("rsc/Fase1/Fase1_Asfalto.txt", COR::CINZA), 24, 0));
 	objs.push_back(new ObjetoDeJogo("faixa", Sprite("rsc/Fase1/Fase1_Faixa.txt", COR::AMARELA), 24, 0));
 
 
 	// Objetos de jogo funcionáveis
 	// Caminhao caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 1, COR::MAGENTA), 24, 2), DIREITA);
 
-	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 1, COR::MAGENTA), 24, 2), DIREITA);
-	objs.push_back(carro1);
 	frogger = new ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 1, COR::VERDE), 35, 77);
 	objs.push_back(frogger);
-		
+
+	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 3, COR::MAGENTA), 24, -10), DIREITA);
+	objs.push_back(carro1);
+	carro2 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 3, COR::MAGENTA), 24, 50), DIREITA);
+	objs.push_back(carro2);
+
+	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Fase1/Fase1_Parede.txt", COR::VERDE), 7, 0));
+	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Fase1/Fase1_Parede.txt", COR::VERDE), 7, 158));
+
 	// SpriteBase *tmp = const_cast<SpriteBase*> (objs.back()->getSprite());
 	// life = dynamic_cast<TextSprite*> (tmp);
 	
@@ -32,8 +40,7 @@ void FaseLevel1::init() {
 	
 }
 
-unsigned FaseLevel1::run(SpriteBuffer &screen)
-{
+unsigned FaseLevel1::run(SpriteBuffer &screen) {
 	std::string ent;
 	
 	// Padrão
@@ -42,23 +49,28 @@ unsigned FaseLevel1::run(SpriteBuffer &screen)
 	system("clear");
 	show(screen);
 	
-	while (true)
-	{
-		//l Lendo entrada
+	while (true) {
+		if(carro1->getPosC() >= 160) { carro1->moveTo(24, -15); }
+		if(carro2->getPosC() >= 160) { carro2->moveTo(24, -15); }
+
+		carro1->movimentar();
+		carro2->movimentar();
+
+		// Lendo entrada
 		getline(std::cin,ent);
 		
 		// Processando entradas
 		int posL = frogger->getPosL(), posC = frogger->getPosC();
 		
 		// Colisão com bordas do mapa
-		if (ent == "w" && frogger->getPosL() > 10)
-			frogger->moveUp(3);
-		else if (ent == "s" && frogger->getPosL() < screen.getAltura() - 15)
-			frogger->moveDown(3);
-		else if (ent == "a" && frogger->getPosC() > 12)
-			frogger->moveLeft(3);
-		else if (ent == "d" && frogger->getPosC() < screen.getLarguraMaxFit() - frogger->getSprite()->getLarguraMaxFit() - 13)
-			frogger->moveRight(3);
+		if (ent == "w" && frogger->getPosL() > 7)
+			frogger->moveUp(1);
+		else if (ent == "s" && frogger->getPosL() < screen.getAltura() - 5)
+			frogger->moveDown(1);
+		else if (ent == "a" && frogger->getPosC() > 3)
+			frogger->moveLeft(2);
+		else if (ent == "d" && frogger->getPosC() < screen.getLarguraMaxFit() - frogger->getSprite()->getLarguraMaxFit() - 5)
+			frogger->moveRight(2);
 		else if (ent == "q")
 			return Fase::END_GAME;
 			
