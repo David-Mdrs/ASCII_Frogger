@@ -32,6 +32,12 @@ private:
 
 	Caminhao *caminhao1;
 	Caminhao *caminhao2;
+
+	ObjetoDeJogo *muro1;
+	ObjetoDeJogo *muro2;
+	ObjetoDeJogo *muro3;
+	ObjetoDeJogo *muro4;
+	ObjetoDeJogo *muro5;
 	
 	std::list<ObjetoDeJogo*> colisoes;
 };

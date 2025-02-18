@@ -7,9 +7,6 @@ void FaseLevel1::init() {
 
 	// Objetos de jogo apenas visuais
 	objs.push_back(new ObjetoDeJogo("fase1", Sprite("rsc/Fase1.txt", COR::VERDE), 0, 0));
-	for(int i = 0; i < 5; i++) {
-		objs.push_back(new ObjetoDeJogo("cabine", Sprite("rsc/Cabine.txt", COR::VERDE), 7, 15 + 29 * i));
-	}
 	objs.push_back(new ObjetoDeJogo("agua", Sprite("rsc/Agua.txt", COR::CIANO), 20, 3));
 	for(int i = 0; i < 6; i++) {
 		objs.push_back(new ObjetoDeJogo("aguaMenor", Sprite("rsc/Agua_Menor.txt", COR::CIANO), 10, 5 + 29 * i));
@@ -38,6 +35,17 @@ void FaseLevel1::init() {
 
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 0));
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 160));
+
+	muro1 = new ObjetoDeJogo("muro", Sprite("rsc/Muro.txt", COR::VERDE), 7, 15);
+	objs.push_back(muro1);
+	muro2 = new ObjetoDeJogo("muro", Sprite("rsc/Muro.txt", COR::VERDE), 7, 44);
+	objs.push_back(muro2);
+	muro3 = new ObjetoDeJogo("muro", Sprite("rsc/Muro.txt", COR::VERDE), 7, 73);
+	objs.push_back(muro3);
+	muro4 = new ObjetoDeJogo("muro", Sprite("rsc/Muro.txt", COR::VERDE), 7, 102);
+	objs.push_back(muro4);
+	muro5 = new ObjetoDeJogo("muro", Sprite("rsc/Muro.txt", COR::VERDE), 7, 131);
+	objs.push_back(muro5);
 
 	objs.push_back(new ObjetoDeJogo("vida",TextSprite("###"), 3, 39));
 	SpriteBase *tmp = const_cast<SpriteBase*> (objs.back()->getSprite());
@@ -72,14 +80,21 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		int posL = frogger->getPosL(), posC = frogger->getPosC();
 		
 		// Colisão com bordas do mapa
-		if (ent == "w" && frogger->getPosL() > 7)
+		if (ent == "w" && frogger->getPosL() > 7) {
 			frogger->moveUp(1);
-		else if (ent == "s" && frogger->getPosL() < screen.getAltura() - 6)
+			if(frogger->colideCom(*muro1) || frogger->colideCom(*muro2) || frogger->colideCom(*muro3) || frogger->colideCom(*muro4) || frogger->colideCom(*muro5))
+				frogger->moveDown(1);
+		} else if (ent == "s" && frogger->getPosL() < screen.getAltura() - 6)
 			frogger->moveDown(1);
-		else if (ent == "a" && frogger->getPosC() > 5)
+		else if (ent == "a" && frogger->getPosC() > 5) {
 			frogger->moveLeft(2);
-		else if (ent == "d" && frogger->getPosC() < screen.getLarguraMaxFit() - frogger->getSprite()->getLarguraMaxFit() - 7)
+			if(frogger->colideCom(*muro1) || frogger->colideCom(*muro2) || frogger->colideCom(*muro3) || frogger->colideCom(*muro4) || frogger->colideCom(*muro5))
+				frogger->moveRight(2);
+		} else if (ent == "d" && frogger->getPosC() < screen.getLarguraMaxFit() - frogger->getSprite()->getLarguraMaxFit() - 7) {
 			frogger->moveRight(2);
+			if(frogger->colideCom(*muro1) || frogger->colideCom(*muro2) || frogger->colideCom(*muro3) || frogger->colideCom(*muro4) || frogger->colideCom(*muro5))
+				frogger->moveLeft(2);
+		}
 		else if (ent == "q")
 			return Fase::END_GAME;
 		
