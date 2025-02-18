@@ -13,7 +13,8 @@ public:
 
     Direcao getDirecao() const { return m_direcao; }
 
-    virtual void movimentar() {
+    virtual void update() {
+        ObjetoDeJogo::update();
         if(getDirecao() == ESQUERDA) {
             this->moveLeft(2);
         } else {

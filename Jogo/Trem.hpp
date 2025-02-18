@@ -14,7 +14,8 @@ public:
     void setAtivo(const bool ativo) { m_ativo = ativo; }
     void setVelocidade(const int velocidade) { m_velocidade = velocidade; }
 
-    void movimentar() override {
+    void update() override {
+        ObjetoDeJogo::update();
         if(getDirecao() == ESQUERDA) {
             this->moveLeft(getVelocidade());
         } else {

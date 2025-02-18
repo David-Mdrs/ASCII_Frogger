@@ -14,7 +14,7 @@ public:
 	~Game() {}
 	
 	static void run() {
-		SpriteBuffer screen(161, 40);
+		SpriteBuffer screen(165, 41);
 
 	
 		// FaseStart start("FaseStart",SpriteAnimado("rsc/castleMedieval.anm",3,COR::VERMELHA));

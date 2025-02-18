@@ -7,6 +7,7 @@
 
 #include "Movimentavel.hpp"
 #include "Caminhao.hpp"
+#include "Frogger.hpp"
 
 class FaseLevel1 : public Fase {
 public:
@@ -21,12 +22,16 @@ public:
 	bool colideComBloco() const;
 	
 private:
-	ObjetoDeJogo *frogger;
+	Frogger *frogger;
+	ObjetoDeJogo *froggerMorto;
+	TextSprite *vida;
+
 	Movimentavel *carro1;
 	Movimentavel *carro2;
-	Caminhao *caminhao;
-	
-	// TextSprite *life;
+	Movimentavel *carro3;
+
+	Caminhao *caminhao1;
+	Caminhao *caminhao2;
 	
 	std::list<ObjetoDeJogo*> colisoes;
 };
