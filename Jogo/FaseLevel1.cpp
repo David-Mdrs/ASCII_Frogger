@@ -63,8 +63,8 @@ void FaseLevel1::init() {
 	muro5 = new ObjetoDeJogo("muro", Sprite("rsc/Muro.txt", COR::VERDE), 7, 131);
 	objs.push_back(muro5);
 
-	objs.push_back(new ObjetoDeJogo("vida",TextSprite("###"), 3, 41));
 	objs.push_back(new ObjetoDeJogo("fase",TextSprite("01"), 3, 84));
+	objs.push_back(new ObjetoDeJogo("vida",TextSprite("###"), 3, 41));
 	SpriteBase *tmp = const_cast<SpriteBase*> (objs.back()->getSprite());
 	vida = dynamic_cast<TextSprite*> (tmp);
 }
