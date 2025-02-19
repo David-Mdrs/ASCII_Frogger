@@ -26,6 +26,7 @@ private:
 	Frogger *frogger;
 	ObjetoDeJogo *froggerMorto;
 	TextSprite *vida;
+	ObjetoDeJogo *chegada;
 
 	Movimentavel *carro1;
 	Movimentavel *carro2;

@@ -7,15 +7,19 @@ void FaseLevel1::init() {
 
 	// Objetos de jogo apenas visuais
 	objs.push_back(new ObjetoDeJogo("fase1", Sprite("rsc/Fase1.txt", COR::VERDE), 0, 0));
+
 	objs.push_back(new ObjetoDeJogo("agua", Sprite("rsc/Agua.txt", COR::CIANO), 17, 3));
-	for(int i = 0; i < 6; i++) {
-		objs.push_back(new ObjetoDeJogo("aguaMenor", Sprite("rsc/Agua_Menor.txt", COR::CIANO), 10, 5 + 29 * i));
-	}
+
+	for(int i = 0; i < 6; i++) { objs.push_back(new ObjetoDeJogo("aguaMenor", Sprite("rsc/Agua_Menor.txt", COR::CIANO), 10, 5 + 29 * i)); }
+
 	objs.push_back(new ObjetoDeJogo("rodovia", Sprite("rsc/Asfalto.txt", COR::CINZA), 22, 0));
 	objs.push_back(new ObjetoDeJogo("rodovia", Sprite("rsc/Asfalto.txt", COR::CINZA), 30, 0));
 
 	objs.push_back(new ObjetoDeJogo("faixa", Sprite("rsc/Faixa.txt", COR::AMARELA), 24, 0));
 	objs.push_back(new ObjetoDeJogo("faixa", Sprite("rsc/Faixa.txt", COR::AMARELA), 32, 0));
+
+	chegada = new ObjetoDeJogo("chegada", SpriteBuffer(155, 1), 7, 5);
+	objs.push_back(chegada);
 
 	// Objetos de jogo funcionáveis
 	troncoG1 = new Plataforma(ObjetoDeJogo("troncoG", SpriteAnimado("rsc/TroncoGrandeEsq.anm", 3, COR::MARROM), 14, 10), ESQUERDA);
@@ -42,7 +46,7 @@ void FaseLevel1::init() {
 
 	caminhao1 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoEsq.anm", 5, COR::LARANJA), 30, 70), ESQUERDA);
 	objs.push_back(caminhao1);
-	caminhao2 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoEsq.anm", 5, COR::LARANJA), 30, 160), ESQUERDA, 5);
+	caminhao2 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoEsq.anm", 5, COR::LARANJA), 30, 160), ESQUERDA, 14);
 	objs.push_back(caminhao2);
 
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 0));
@@ -60,13 +64,9 @@ void FaseLevel1::init() {
 	objs.push_back(muro5);
 
 	objs.push_back(new ObjetoDeJogo("vida",TextSprite("###"), 3, 41));
+	objs.push_back(new ObjetoDeJogo("fase",TextSprite("01"), 3, 84));
 	SpriteBase *tmp = const_cast<SpriteBase*> (objs.back()->getSprite());
 	vida = dynamic_cast<TextSprite*> (tmp);
-	
-	// Blocos
-	// objs.push_back(new ObjetoDeJogo("B1",Sprite("rsc/castleBlock1.img",COR::VERMELHA),18,38));
-	// colisoes.push_back(objs.back());
-	
 }
 
 unsigned FaseLevel1::run(SpriteBuffer &screen) {
@@ -118,10 +118,6 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		else if (ent == "q")
 			return Fase::END_GAME;
 		
-
-		// if (colideComBloco())
-		// 	frogger->moveTo(posL,posC);
-		
 		
 		// Processando eventos
 		if (frogger->colideComBordas(*carro1) || frogger->colideComBordas(*carro2) || frogger->colideComBordas(*carro3) ||
@@ -133,35 +129,16 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 			
 		if (!frogger->vivo())
 			return Fase::GAME_OVER;
-			
-			// life->setText(std::string(hero->getLife()/5,'#'));
-		
-		// if (hero->colideComBordas(*chave))
-		// {
-		// 	chave->desativarObj();
-		// 	miniChave->ativarObj();
-		// 	hero->pegarChave();
-		// }
-		// else if (hero->colideComBordas(*tapetePorta) && hero->possuiChave())
-		// {
-		// 	porta->openTheDoor();
-		// }
-		// else if (hero->colideComBordas(*princesa))
-		// {
-		// 	princesa->desativarObj();
-		// 	hero->salvarPrincesa();
-		// }
-		// else if (hero->colideComBordas(*portao) && hero->salvouPrincesa())
-		// {
-		// 	return Fase::LEVEL_COMPLETE;
-		// }
-		
+
 		// Padrão
 		update();
 		screen.clear();
 		draw(screen);
 		system("clear");
 		show(screen);
+
+		if (frogger->colideComBordas(*chegada))
+			return Fase::LEVEL_COMPLETE;
 	}
 	
 	return Fase::END_GAME; // não necessário
