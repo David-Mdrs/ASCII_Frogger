@@ -7,30 +7,42 @@ void FaseLevel1::init() {
 
 	// Objetos de jogo apenas visuais
 	objs.push_back(new ObjetoDeJogo("fase1", Sprite("rsc/Fase1.txt", COR::VERDE), 0, 0));
-	objs.push_back(new ObjetoDeJogo("agua", Sprite("rsc/Agua.txt", COR::CIANO), 20, 3));
+	objs.push_back(new ObjetoDeJogo("agua", Sprite("rsc/Agua.txt", COR::CIANO), 17, 3));
 	for(int i = 0; i < 6; i++) {
 		objs.push_back(new ObjetoDeJogo("aguaMenor", Sprite("rsc/Agua_Menor.txt", COR::CIANO), 10, 5 + 29 * i));
 	}
-	objs.push_back(new ObjetoDeJogo("rodovia", Sprite("rsc/Asfalto.txt", COR::CINZA), 24, 0));
-	objs.push_back(new ObjetoDeJogo("rodovia", Sprite("rsc/Asfalto.txt", COR::CINZA), 31, 0));
+	objs.push_back(new ObjetoDeJogo("rodovia", Sprite("rsc/Asfalto.txt", COR::CINZA), 22, 0));
+	objs.push_back(new ObjetoDeJogo("rodovia", Sprite("rsc/Asfalto.txt", COR::CINZA), 30, 0));
 
-	objs.push_back(new ObjetoDeJogo("faixa", Sprite("rsc/Faixa.txt", COR::AMARELA), 26, 0));
-	objs.push_back(new ObjetoDeJogo("faixa", Sprite("rsc/Faixa.txt", COR::AMARELA), 33, 0));
+	objs.push_back(new ObjetoDeJogo("faixa", Sprite("rsc/Faixa.txt", COR::AMARELA), 24, 0));
+	objs.push_back(new ObjetoDeJogo("faixa", Sprite("rsc/Faixa.txt", COR::AMARELA), 32, 0));
 
 	// Objetos de jogo funcionáveis
+	troncoG1 = new Plataforma(ObjetoDeJogo("troncoG", SpriteAnimado("rsc/TroncoGrandeEsq.anm", 3, COR::MARROM), 14, 10), ESQUERDA);
+	objs.push_back(troncoG1);
+	troncoG2 = new Plataforma(ObjetoDeJogo("troncoG", SpriteAnimado("rsc/TroncoGrandeEsq.anm", 3, COR::MARROM), 14, 80), ESQUERDA);
+	objs.push_back(troncoG2);
+	troncoG3 = new Plataforma(ObjetoDeJogo("troncoG", SpriteAnimado("rsc/TroncoGrandeEsq.anm", 3, COR::MARROM), 14, 140), ESQUERDA);
+	objs.push_back(troncoG3);
+
+	troncoP1 = new Plataforma(ObjetoDeJogo("troncoP", SpriteAnimado("rsc/TroncoPequenoDir.anm", 3, COR::MARROM), 11, 30), DIREITA);
+	objs.push_back(troncoP1);
+	troncoP2 = new Plataforma(ObjetoDeJogo("troncoP", SpriteAnimado("rsc/TroncoPequenoDir.anm", 3, COR::MARROM), 11, 110), DIREITA);
+	objs.push_back(troncoP2);
+
 	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 1, COR::VERDE), 35, 77));
 	objs.push_back(frogger);
 
-	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 24, -10), DIREITA), 4;
+	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 22, -10), DIREITA, 7);
 	objs.push_back(carro1);
-	carro2 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 24, 50), DIREITA, 4);
+	carro2 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 22, 50), DIREITA, 7);
 	objs.push_back(carro2);
-	carro3 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 24, 100), DIREITA, 4);
+	carro3 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 22, 100), DIREITA, 7);
 	objs.push_back(carro3);
 
-	caminhao1 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoEsq.anm", 5, COR::MAGENTA), 31, 70), ESQUERDA);
+	caminhao1 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoEsq.anm", 5, COR::LARANJA), 30, 70), ESQUERDA);
 	objs.push_back(caminhao1);
-	caminhao2 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoEsq.anm", 5, COR::MAGENTA), 31, 160), ESQUERDA, 5);
+	caminhao2 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoEsq.anm", 5, COR::LARANJA), 30, 160), ESQUERDA, 5);
 	objs.push_back(caminhao2);
 
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 0));
@@ -47,7 +59,7 @@ void FaseLevel1::init() {
 	muro5 = new ObjetoDeJogo("muro", Sprite("rsc/Muro.txt", COR::VERDE), 7, 131);
 	objs.push_back(muro5);
 
-	objs.push_back(new ObjetoDeJogo("vida",TextSprite("###"), 3, 39));
+	objs.push_back(new ObjetoDeJogo("vida",TextSprite("###"), 3, 41));
 	SpriteBase *tmp = const_cast<SpriteBase*> (objs.back()->getSprite());
 	vida = dynamic_cast<TextSprite*> (tmp);
 	
@@ -67,11 +79,19 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 	show(screen);
 	
 	while (true) {
-		if(carro1->getPosC() >= 160) { carro1->moveTo(24, -15); }
-		if(carro2->getPosC() >= 160) { carro2->moveTo(24, -15); }
-		if(carro3->getPosC() >= 160) { carro3->moveTo(24, -15); }
-		if(caminhao1->getPosC() <= 10) { caminhao1->moveTo(31, 160); }
-		if(caminhao2->getPosC() <= 10) { caminhao2->moveTo(31, 160); }
+		if(carro1->getPosC() >= 160) { carro1->moveTo(22, -5); }
+		if(carro2->getPosC() >= 160) { carro2->moveTo(22, -5); }
+		if(carro3->getPosC() >= 160) { carro3->moveTo(22, -5); }
+
+		if(caminhao1->getPosC() <= 10) { caminhao1->moveTo(30, 160); }
+		if(caminhao2->getPosC() <= 10) { caminhao2->moveTo(30, 160); }
+		
+		if(troncoG1->getPosC() <= -17) { troncoG1->moveTo(14, 160); }
+		if(troncoG2->getPosC() <= -17) { troncoG2->moveTo(14, 160); }
+		if(troncoG3->getPosC() <= -17) { troncoG3->moveTo(14, 160); }
+		
+		if(troncoP1->getPosC() >= 159) { troncoP1->moveTo(11, -8); }
+		if(troncoP2->getPosC() >= 159) { troncoP2->moveTo(11, -8); }
 
 		// Lendo entrada
 		getline(std::cin,ent);

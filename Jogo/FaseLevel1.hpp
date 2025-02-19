@@ -8,6 +8,7 @@
 #include "Movimentavel.hpp"
 #include "Caminhao.hpp"
 #include "Frogger.hpp"
+#include "Plataforma.hpp"
 
 class FaseLevel1 : public Fase {
 public:
@@ -32,6 +33,13 @@ private:
 
 	Caminhao *caminhao1;
 	Caminhao *caminhao2;
+
+	Plataforma *troncoG1;
+	Plataforma *troncoG2;
+	Plataforma *troncoG3;
+
+	Plataforma *troncoP1;
+	Plataforma *troncoP2;
 
 	ObjetoDeJogo *muro1;
 	ObjetoDeJogo *muro2;

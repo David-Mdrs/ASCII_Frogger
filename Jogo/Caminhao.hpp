@@ -5,14 +5,11 @@
 
 class Caminhao : public Movimentavel {
 public:
-    Caminhao(const ObjetoDeJogo &obj, const Direcao direcao, const int velocidade = 1) : Movimentavel{obj, direcao}, m_velocidade{velocidade} {}
+    Caminhao(const ObjetoDeJogo &obj, const Direcao direcao, const int velocidade = 2) : Movimentavel{obj, direcao, velocidade} {}
     ~Caminhao() {}
 
-    int getVelocidade() const { return m_velocidade; }
     bool getAtivo() const { return m_ativo; }
-
     void setAtivo(const bool ativo) { m_ativo = ativo; }
-    void setVelocidade(const int velocidade) { m_velocidade = velocidade; }
 
     void update() override {
         ObjetoDeJogo::update();
@@ -33,7 +30,6 @@ public:
 
 private:
     bool m_ativo{true};
-    int m_velocidade;
 };
 
 #endif
