@@ -23,21 +23,21 @@ void FaseLevel1::init() {
 	objs.push_back(chegada);
 
 	// Objetos de jogo funcionáveis
-	troncoG1 = new Plataforma(ObjetoDeJogo("troncoG", SpriteAnimado("rsc/TroncoGrandeEsq.anm", 3, COR::MARROM), 14, 10), ESQUERDA);
+	troncoG1 = new Plataforma(ObjetoDeJogo("troncoG", SpriteAnimado("rsc/TroncoGrandeEsq.anm", 3, COR::MARROM), 14, 10), ESQUERDA, 5);
 	objs.push_back(troncoG1);
-	troncoG2 = new Plataforma(ObjetoDeJogo("troncoG", SpriteAnimado("rsc/TroncoGrandeEsq.anm", 3, COR::MARROM), 14, 80), ESQUERDA);
+	troncoG2 = new Plataforma(ObjetoDeJogo("troncoG", SpriteAnimado("rsc/TroncoGrandeEsq.anm", 3, COR::MARROM), 14, 80), ESQUERDA, 5);
 	objs.push_back(troncoG2);
-	troncoG3 = new Plataforma(ObjetoDeJogo("troncoG", SpriteAnimado("rsc/TroncoGrandeEsq.anm", 3, COR::MARROM), 14, 140), ESQUERDA);
+	troncoG3 = new Plataforma(ObjetoDeJogo("troncoG", SpriteAnimado("rsc/TroncoGrandeEsq.anm", 3, COR::MARROM), 14, 140), ESQUERDA, 5);
 	objs.push_back(troncoG3);
 
-	troncoP1 = new Plataforma(ObjetoDeJogo("troncoP", SpriteAnimado("rsc/TroncoPequenoDir.anm", 3, COR::MARROM), 11, 30), DIREITA);
+	troncoP1 = new Plataforma(ObjetoDeJogo("troncoP", SpriteAnimado("rsc/TroncoPequenoDir.anm", 3, COR::MARROM), 11, 30), DIREITA, 3);
 	objs.push_back(troncoP1);
-	troncoP2 = new Plataforma(ObjetoDeJogo("troncoP", SpriteAnimado("rsc/TroncoPequenoDir.anm", 3, COR::MARROM), 11, 110), DIREITA);
+	troncoP2 = new Plataforma(ObjetoDeJogo("troncoP", SpriteAnimado("rsc/TroncoPequenoDir.anm", 3, COR::MARROM), 11, 110), DIREITA, 3);
 	objs.push_back(troncoP2);
 
 	centroFrogger = new ObjetoDeJogo("centroFrogger", SpriteBuffer(2, 1), 20, 79);
 	objs.push_back(centroFrogger);
-	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 1, COR::VERDE), 19, 77)); // 35, 77
+	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 2, COR::VERDE), 19, 77)); // 35, 77
 	objs.push_back(frogger);
 
 	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 22, -10), DIREITA, 7);
@@ -86,12 +86,12 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		if(carro2->getPosC() >= 160) { carro2->moveTo(22, -5); }
 		if(carro3->getPosC() >= 160) { carro3->moveTo(22, -5); }
 
-		if(caminhao1->getPosC() <= 10) { caminhao1->moveTo(30, 160); }
-		if(caminhao2->getPosC() <= 10) { caminhao2->moveTo(30, 160); }
+		if(caminhao1->getPosC() <= 1) { caminhao1->moveTo(30, 160); }
+		if(caminhao2->getPosC() <= 1) { caminhao2->moveTo(30, 160); }
 		
-		if(troncoG1->getPosC() <= -17) { troncoG1->moveTo(14, 160); }
-		if(troncoG2->getPosC() <= -17) { troncoG2->moveTo(14, 160); }
-		if(troncoG3->getPosC() <= -17) { troncoG3->moveTo(14, 160); }
+		if(troncoG1->getPosC() <= -28) { troncoG1->moveTo(14, 160); }
+		if(troncoG2->getPosC() <= -28) { troncoG2->moveTo(14, 160); }
+		if(troncoG3->getPosC() <= -28) { troncoG3->moveTo(14, 160); }
 		
 		if(troncoP1->getPosC() >= 159) { troncoP1->moveTo(11, -8); }
 		if(troncoP2->getPosC() >= 159) { troncoP2->moveTo(11, -8); }
@@ -131,11 +131,14 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		// Colisão com água
 		if (centroFrogger->getPosL() > 10 && centroFrogger->getPosL() < 17) {
 			if (centroFrogger->colideCom(*troncoG1) || centroFrogger->colideCom(*troncoG2) || centroFrogger->colideCom(*troncoG3)) {
-				frogger->moveLeft(2);
+				frogger->moveLeft(5);
 				centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
 			} else if (centroFrogger->colideCom(*troncoP1) || centroFrogger->colideCom(*troncoP2)) {
-				frogger->moveRight(2);
-				centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
+				if(frogger->colideCom(*muro1) || frogger->colideCom(*muro2) || frogger->colideCom(*muro3) || frogger->colideCom(*muro4) || frogger->colideCom(*muro5)) {
+					frogger->moveLeft(2);
+				} else { frogger->moveRight(3);
+					centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
+				}
 			} else {
 				frogger->perderVida();
 				frogger->moveTo(35, 77);
@@ -150,7 +153,7 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		draw(screen);
 		system("clear");
 		show(screen);
-		system("sleep 0.1");
+		system("sleep 0.125");
 
 		if (!frogger->vivo())
 			return Fase::GAME_OVER;
