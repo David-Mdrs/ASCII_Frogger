@@ -18,7 +18,7 @@ public:
 
 	
 		// FaseStart start("FaseStart",SpriteAnimado("rsc/castleMedieval.anm",3,COR::VERMELHA));
-		FaseLevel1 fase1("Fase1",Sprite("rsc/Fase1/Fase1_Background.txt",COR::VERMELHA));
+		FaseLevel1 fase1("Fase1",Sprite("rsc/Fase1.txt",COR::VERMELHA));
 		// FaseFinal faseFinal("Fase1",Sprite("rsc/title1Gothic.img"));
 		
 		// start.init();

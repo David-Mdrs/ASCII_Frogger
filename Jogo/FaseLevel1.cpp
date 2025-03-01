@@ -17,7 +17,7 @@ void FaseLevel1::init() {
 
 	objs.push_back(new ObjetoDeJogo("faixa", Sprite("rsc/Faixa.txt", COR::AMARELA), 24, 0));
 	objs.push_back(new ObjetoDeJogo("faixa", Sprite("rsc/Faixa.txt", COR::AMARELA), 32, 0));
-
+	
 	chegada = new ObjetoDeJogo("chegada", SpriteBuffer(155, 1), 7, 5);
 	objs.push_back(chegada);
 
