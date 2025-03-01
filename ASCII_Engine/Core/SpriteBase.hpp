@@ -25,6 +25,8 @@ public:
 	SpriteBase(COR::Cor cor = COR::NULL_COLOR):colorHandler(cor) {}
 	
 	virtual ~SpriteBase(){}
+	
+	virtual SpriteBase *copia() const = 0;
 
     virtual int getLarguraMaxFit() const {
 		unsigned lm{0};
@@ -44,15 +46,14 @@ public:
 	virtual int getAltura() const {return this->limits.size();}
 	
 	virtual void putAt(const SpriteBase &, int , int) = 0;
-	virtual void putCenter(const SpriteBase &sprt, int l) { putAt(sprt,l,(limits[l].largLinha-sprt.getLimits()[l].largLinha)/2); }
+	virtual void putCenter(const SpriteBase &sprt, int l) { putAt(sprt,l,(getLarguraMax()-sprt.getLarguraMax())/2); }
+	//virtual void putCenter(const SpriteBase &sprt, int l) { putAt(sprt,l,(limits[l].largLinha-sprt.getLimits()[l].largLinha)/2); }
 	//virtual void putLeft(const SpriteBase &sprt, int l) { putAt(sprt,l,0); }
 	//virtual void putRight(const SpriteBase &sprt, int l) { putAt(sprt,l,limits[l].largLinha-sprt.limits[l]); };
 	//virtual void appendLeft(const SpriteBase &) = 0;
 	//virtual void appendRight(const SpriteBase &) = 0;
 	
 	virtual std::string getLinha(unsigned) const = 0;
-	
-	virtual std::string whoami() const = 0;
 	
 	//RenderBase
 	virtual void init() = 0;

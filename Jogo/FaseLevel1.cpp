@@ -1,4 +1,5 @@
 #include "FaseLevel1.hpp"
+#include "../ASCII_Engine/input/Keyboard.hpp"
 
 #include <iostream>
 #include <string>
@@ -70,7 +71,6 @@ void FaseLevel1::init() {
 }
 
 unsigned FaseLevel1::run(SpriteBuffer &screen) {
-	std::string ent;
 	
 	// Padrão
 	screen.clear();
@@ -78,6 +78,7 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 	system("clear");
 	show(screen);
 	
+	Keyboard::setMode(Keyboard::NONBLOCKING);
 	while (true) {
 		if(carro1->getPosC() >= 160) { carro1->moveTo(22, -5); }
 		if(carro2->getPosC() >= 160) { carro2->moveTo(22, -5); }
@@ -94,28 +95,28 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		if(troncoP2->getPosC() >= 159) { troncoP2->moveTo(11, -8); }
 
 		// Lendo entrada
-		getline(std::cin,ent);
+		char ent = Keyboard::read();
 		
 		// Processando entradas
 		int posL = frogger->getPosL(), posC = frogger->getPosC();
 		
 		// Colisão com bordas do mapa
-		if (ent == "w" && frogger->getPosL() > 7) {
+		if (ent == 'w' && frogger->getPosL() > 7) {
 			frogger->moveUp(1);
 			if(frogger->colideCom(*muro1) || frogger->colideCom(*muro2) || frogger->colideCom(*muro3) || frogger->colideCom(*muro4) || frogger->colideCom(*muro5))
 				frogger->moveDown(1);
-		} else if (ent == "s" && frogger->getPosL() < screen.getAltura() - 6)
+		} else if (ent == 's' && frogger->getPosL() < screen.getAltura() - 6)
 			frogger->moveDown(1);
-		else if (ent == "a" && frogger->getPosC() > 5) {
+		else if (ent == 'a' && frogger->getPosC() > 5) {
 			frogger->moveLeft(2);
 			if(frogger->colideCom(*muro1) || frogger->colideCom(*muro2) || frogger->colideCom(*muro3) || frogger->colideCom(*muro4) || frogger->colideCom(*muro5))
 				frogger->moveRight(2);
-		} else if (ent == "d" && frogger->getPosC() < screen.getLarguraMaxFit() - frogger->getSprite()->getLarguraMaxFit() - 7) {
+		} else if (ent == 'd' && frogger->getPosC() < screen.getLarguraMaxFit() - frogger->getSprite()->getLarguraMaxFit() - 7) {
 			frogger->moveRight(2);
 			if(frogger->colideCom(*muro1) || frogger->colideCom(*muro2) || frogger->colideCom(*muro3) || frogger->colideCom(*muro4) || frogger->colideCom(*muro5))
 				frogger->moveLeft(2);
 		}
-		else if (ent == "q")
+		else if (ent == 'q')
 			return Fase::END_GAME;
 		
 		
@@ -136,6 +137,7 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		draw(screen);
 		system("clear");
 		show(screen);
+		system("sleep 0.1");
 
 		if (frogger->colideComBordas(*chegada))
 			return Fase::LEVEL_COMPLETE;
