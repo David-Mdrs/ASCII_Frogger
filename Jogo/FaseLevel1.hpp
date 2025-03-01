@@ -24,6 +24,7 @@ public:
 	
 private:
 	Frogger *frogger;
+	ObjetoDeJogo *centroFrogger;
 	ObjetoDeJogo *froggerMorto;
 	TextSprite *vida;
 	ObjetoDeJogo *chegada;

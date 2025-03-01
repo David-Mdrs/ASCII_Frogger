@@ -35,7 +35,9 @@ void FaseLevel1::init() {
 	troncoP2 = new Plataforma(ObjetoDeJogo("troncoP", SpriteAnimado("rsc/TroncoPequenoDir.anm", 3, COR::MARROM), 11, 110), DIREITA);
 	objs.push_back(troncoP2);
 
-	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 1, COR::VERDE), 35, 77));
+	centroFrogger = new ObjetoDeJogo("centroFrogger", SpriteBuffer(2, 1), 20, 79);
+	objs.push_back(centroFrogger);
+	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 1, COR::VERDE), 19, 77)); // 35, 77
 	objs.push_back(frogger);
 
 	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 22, -10), DIREITA, 7);
@@ -71,7 +73,7 @@ void FaseLevel1::init() {
 }
 
 unsigned FaseLevel1::run(SpriteBuffer &screen) {
-	
+
 	// Padrão
 	screen.clear();
 	draw(screen);
@@ -96,10 +98,7 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 
 		// Lendo entrada
 		char ent = Keyboard::read();
-		
-		// Processando entradas
-		int posL = frogger->getPosL(), posC = frogger->getPosC();
-		
+
 		// Colisão com bordas do mapa
 		if (ent == 'w' && frogger->getPosL() > 7) {
 			frogger->moveUp(1);
@@ -118,18 +117,32 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		}
 		else if (ent == 'q')
 			return Fase::END_GAME;
+
+		// Redefinindo centro do frogger
+		centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
 		
-		
-		// Processando eventos
+		// Colisão com carros e caminhões
 		if (frogger->colideComBordas(*carro1) || frogger->colideComBordas(*carro2) || frogger->colideComBordas(*carro3) ||
 			frogger->colideComBordas(*caminhao1) || frogger->colideComBordas(*caminhao2)) {
 				frogger->perderVida();
 				frogger->moveTo(35, 77);
 				vida->setText(std::string(frogger->getVida(), '#'));
 		}
-			
-		if (!frogger->vivo())
-			return Fase::GAME_OVER;
+		// Colisão com água
+		if (centroFrogger->getPosL() > 10 && centroFrogger->getPosL() < 17) {
+			if (centroFrogger->colideCom(*troncoG1) || centroFrogger->colideCom(*troncoG2) || centroFrogger->colideCom(*troncoG3)) {
+				frogger->moveLeft(2);
+				centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
+			} else if (centroFrogger->colideCom(*troncoP1) || centroFrogger->colideCom(*troncoP2)) {
+				frogger->moveRight(2);
+				centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
+			} else {
+				frogger->perderVida();
+				frogger->moveTo(35, 77);
+				vida->setText(std::string(frogger->getVida(), '#'));
+			}
+		}
+	
 
 		// Padrão
 		update();
@@ -138,6 +151,9 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		system("clear");
 		show(screen);
 		system("sleep 0.1");
+
+		if (!frogger->vivo())
+			return Fase::GAME_OVER;
 
 		if (frogger->colideComBordas(*chegada))
 			return Fase::LEVEL_COMPLETE;
