@@ -11,6 +11,9 @@ public:
 	virtual void init();
 	virtual unsigned run(SpriteBuffer &screen);
 private:	
+    ObjetoDeJogo *sapo1;
+    ObjetoDeJogo *sapo2;
+    ObjetoDeJogo *texto;
 	enum {RIDING, PRACING, END};
 };
 
