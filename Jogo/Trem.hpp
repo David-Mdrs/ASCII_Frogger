@@ -23,17 +23,15 @@ public:
         }
 
         if(getAtivo()) {
-            if(getVelocidade() < 10) {
-                setVelocidade(getVelocidade() + 2);
-                setAtivo(false); }
-        } else {
-            setAtivo(true);
+            if(getVelocidade() < 16) {
+                setVelocidade(getVelocidade() + 3);
+            }
         }
     }
 
 private:
     bool m_ativo{false};
-    int m_velocidade{1};
+    int m_velocidade{2};
 };
 
 #endif

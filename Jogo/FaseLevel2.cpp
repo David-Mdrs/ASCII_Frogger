@@ -43,15 +43,18 @@ void FaseLevel2::init() {
 	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 2, COR::VERDE), 35, 77));
 	objs.push_back(frogger);
 
-	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, -10), ESQUERDA, 7);
+	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, -10), ESQUERDA, 9);
 	objs.push_back(carro1);
-	carro2 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, 50), ESQUERDA, 7);
+	carro2 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, 70), ESQUERDA, 9);
 	objs.push_back(carro2);
 
 	caminhao1 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 5, COR::LARANJA), 28, 80), DIREITA);
 	objs.push_back(caminhao1);
 	caminhao2 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 5, COR::LARANJA), 28, 160), DIREITA, 14);
 	objs.push_back(caminhao2);
+
+    trem = new Trem(ObjetoDeJogo("trem", SpriteAnimado("rsc/Trem.anm", 5, COR::BRANCA), 20, -25), DIREITA);
+	objs.push_back(trem);
 
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 0));
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 160));
@@ -89,6 +92,9 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 		if(caminhao1->getPosC() >= 160) { caminhao1->moveTo(28, 1); }
 		if(caminhao2->getPosC() >= 160) { caminhao2->moveTo(28, 1); }
 		
+		if(trem->getPosC() >= 160) { trem->moveTo(20, -27); }
+        if(frogger->getPosL() == 20) { trem->setAtivo(true); }
+
 		// if(troncoG1->getPosC() <= -28) { troncoG1->moveTo(14, 160); }
 		// if(troncoG2->getPosC() <= -28) { troncoG2->moveTo(14, 160); }
 		// if(troncoG3->getPosC() <= -28) { troncoG3->moveTo(14, 160); }
@@ -122,12 +128,12 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 		centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
 		
 		// Colisão com carros e caminhões
-		// if (frogger->colideComBordas(*carro1) || frogger->colideComBordas(*carro2) || frogger->colideComBordas(*carro3) ||
-		// 	frogger->colideComBordas(*caminhao1) || frogger->colideComBordas(*caminhao2)) {
-		// 		frogger->perderVida();
-		// 		frogger->moveTo(35, 77);
-		// 		vida->setText(std::string(frogger->getVida(), '#'));
-		// }
+		if (frogger->colideComBordas(*carro1) || frogger->colideComBordas(*carro2) ||
+			frogger->colideComBordas(*caminhao1) || frogger->colideComBordas(*caminhao2)) {
+				frogger->perderVida();
+				frogger->moveTo(35, 77);
+				vida->setText(std::string(frogger->getVida(), '#'));
+		}
 		// Colisão com água
 		// if (centroFrogger->getPosL() > 10 && centroFrogger->getPosL() < 17) {
 		// 	if (centroFrogger->colideCom(*troncoG1) || centroFrogger->colideCom(*troncoG2) || centroFrogger->colideCom(*troncoG3)) {

@@ -7,6 +7,7 @@
 
 #include "Movimentavel.hpp"
 #include "Caminhao.hpp"
+#include "Trem.hpp"
 #include "Frogger.hpp"
 #include "Plataforma.hpp"
 
@@ -30,10 +31,11 @@ private:
 
 	Movimentavel *carro1;
 	Movimentavel *carro2;
-	Movimentavel *carro3;
 
 	Caminhao *caminhao1;
 	Caminhao *caminhao2;
+
+    Trem *trem;
 
 	Plataforma *troncoG1;
 	Plataforma *troncoG2;
