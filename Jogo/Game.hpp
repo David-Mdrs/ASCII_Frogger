@@ -2,7 +2,7 @@
 #define GAME_HPP
 
 #include "FaseLevel1.hpp"
-// #include "FaseStart.hpp"
+#include "FaseStart.hpp"
 // #include "FaseFinal.hpp"
 #include "../ASCII_Engine/Sprite.hpp"
 #include "../ASCII_Engine/SpriteAnimado.hpp"
@@ -17,12 +17,12 @@ public:
 		SpriteBuffer screen(165, 41);
 
 	
-		// FaseStart start("FaseStart",SpriteAnimado("rsc/castleMedieval.anm",3,COR::VERMELHA));
+		FaseStart start("FaseStart", screen);
 		FaseLevel1 fase1("Fase1",Sprite("rsc/Fase1.txt",COR::VERMELHA));
 		// FaseFinal faseFinal("Fase1",Sprite("rsc/title1Gothic.img"));
 		
-		// start.init();
-		// start.run(screen);
+		start.init();
+		start.run(screen);
 		
 		screen.clear();
 		fase1.init();
