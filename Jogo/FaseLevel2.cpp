@@ -47,10 +47,8 @@ void FaseLevel2::init() {
 	objs.push_back(carro1);
 	carro2 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, 50), ESQUERDA, 7);
 	objs.push_back(carro2);
-	carro3 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, 100), ESQUERDA, 7);
-	objs.push_back(carro3);
 
-	caminhao1 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 5, COR::LARANJA), 28, 60), DIREITA);
+	caminhao1 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 5, COR::LARANJA), 28, 80), DIREITA);
 	objs.push_back(caminhao1);
 	caminhao2 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 5, COR::LARANJA), 28, 160), DIREITA, 14);
 	objs.push_back(caminhao2);
@@ -87,7 +85,6 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 	while (true) {
 		if(carro1->getPosC() <= -5) { carro1->moveTo(31, 160); }
 		if(carro2->getPosC() <= -5) { carro2->moveTo(31, 160); }
-		if(carro3->getPosC() <= -5) { carro3->moveTo(31, 160); }
 
 		if(caminhao1->getPosC() >= 160) { caminhao1->moveTo(28, 1); }
 		if(caminhao2->getPosC() >= 160) { caminhao2->moveTo(28, 1); }
