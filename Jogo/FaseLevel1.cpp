@@ -7,7 +7,7 @@
 void FaseLevel1::init() {
 
 	// Objetos de jogo apenas visuais
-	objs.push_back(new ObjetoDeJogo("fase1", Sprite("rsc/Fase1.txt", COR::VERDE), 0, 0));
+	objs.push_back(new ObjetoDeJogo("fase1", Sprite("rsc/Fase.txt", COR::VERDE), 0, 0));
 
 	objs.push_back(new ObjetoDeJogo("agua", Sprite("rsc/Agua.txt", COR::CIANO), 17, 3));
 
@@ -164,17 +164,3 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 	
 	return Fase::END_GAME; // não necessário
 }
-
-// bool FaseLevel1::colideComBloco() const
-// {
-// 	for (auto it = colisoes.begin() ; it != colisoes.end() ; ++it)
-// 		if (frogger->colideCom(**it)) {
-// 			return true;
-// 		}
-	
-// 	// if (frogger->colideCom(*porta) && !porta->isOpen() )
-// 	// 	return true;
-	
-// 	return false;
-// }
-

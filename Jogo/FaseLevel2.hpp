@@ -1,5 +1,5 @@
-#ifndef FASELEVEL1_HPP
-#define FASELEVEL1_HPP
+#ifndef FASELEVEL2_HPP
+#define FASELEVEL2_HPP
 
 #include "../ASCII_Engine/Fase.hpp"
 #include <string>
@@ -10,10 +10,10 @@
 #include "Frogger.hpp"
 #include "Plataforma.hpp"
 
-class FaseLevel1 : public Fase {
+class FaseLevel2 : public Fase {
 public:
-	FaseLevel1(std::string name, const SpriteBuffer &bkg) : Fase(name,bkg) {}
-	virtual ~FaseLevel1() {}
+	FaseLevel2(std::string name, const SpriteBuffer &bkg) : Fase(name,bkg) {}
+	virtual ~FaseLevel2() {}
 	
 	
 	virtual void init();
@@ -51,4 +51,4 @@ private:
 	std::list<ObjetoDeJogo*> colisoes;
 };
 
-#endif // FASELEVEL1_HPP
+#endif // FASELEVEL2_HPP

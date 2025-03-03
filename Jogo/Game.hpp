@@ -1,9 +1,11 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "FaseLevel1.hpp"
 #include "FaseStart.hpp"
+#include "FaseLevel1.hpp"
+#include "FaseLevel2.hpp"
 // #include "FaseFinal.hpp"
+
 #include "../ASCII_Engine/Sprite.hpp"
 #include "../ASCII_Engine/SpriteAnimado.hpp"
 #include "../ASCII_Engine/Cores.hpp"
@@ -18,24 +20,35 @@ public:
 
 	
 		FaseStart start("FaseStart", screen);
-		FaseLevel1 fase1("Fase1",Sprite("rsc/Fase1.txt",COR::VERMELHA));
+		FaseLevel1 fase1("Fase1", screen);
+		FaseLevel2 fase2("Fase2", screen);
+
 		// FaseFinal faseFinal("Fase1",Sprite("rsc/title1Gothic.img"));
 		
 		start.init();
 		start.run(screen);
-		
+
 		screen.clear();
-		fase1.init();
-		int ret1 = fase1.run(screen);
-		if ( ret1 != Fase::GAME_OVER && ret1 != Fase::END_GAME) {
+		fase2.init();
+		int resultado = fase2.run(screen);
+		if (resultado == Fase::LEVEL_COMPLETE) {
+
 			screen.clear();
-			std::cout << "Fim de jogo..." << std::endl;
-			// faseFinal.init();
-			// faseFinal.run(screen);
+			fase2.init();
+			int resultado = fase2.run(screen);
+			if (resultado == Fase::LEVEL_COMPLETE) {
+				screen.clear();
+				std::cout << "LEVEL COMPLETADO" << std::endl;
+				// faseFinal.init();
+				// faseFinal.run(screen);
+			} else {
+				std::cout << "GAME OVER" << std::endl;
+			}
 		} else {
 			std::cout << "GAME OVER" << std::endl;
+			// faseFinal.init();
+			// faseFinal.run(screen);
 		}
-		std::cout << "Saindo..." << std::endl;
 	}
 };
 
