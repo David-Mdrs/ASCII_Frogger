@@ -43,17 +43,17 @@ void FaseLevel2::init() {
 	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 2, COR::VERDE), 35, 77));
 	objs.push_back(frogger);
 
-	// carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 22, -10), DIREITA, 7);
-	// objs.push_back(carro1);
-	// carro2 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 22, 50), DIREITA, 7);
-	// objs.push_back(carro2);
-	// carro3 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroDir.anm", 5, COR::MAGENTA), 22, 100), DIREITA, 7);
-	// objs.push_back(carro3);
+	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, -10), ESQUERDA, 7);
+	objs.push_back(carro1);
+	carro2 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, 50), ESQUERDA, 7);
+	objs.push_back(carro2);
+	carro3 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, 100), ESQUERDA, 7);
+	objs.push_back(carro3);
 
-	// caminhao1 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoEsq.anm", 5, COR::LARANJA), 30, 70), ESQUERDA);
-	// objs.push_back(caminhao1);
-	// caminhao2 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoEsq.anm", 5, COR::LARANJA), 30, 160), ESQUERDA, 14);
-	// objs.push_back(caminhao2);
+	caminhao1 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 5, COR::LARANJA), 28, 60), DIREITA);
+	objs.push_back(caminhao1);
+	caminhao2 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 5, COR::LARANJA), 28, 160), DIREITA, 14);
+	objs.push_back(caminhao2);
 
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 0));
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 160));
@@ -85,12 +85,12 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 	
 	Keyboard::setMode(Keyboard::NONBLOCKING);
 	while (true) {
-		// if(carro1->getPosC() >= 160) { carro1->moveTo(22, -5); }
-		// if(carro2->getPosC() >= 160) { carro2->moveTo(22, -5); }
-		// if(carro3->getPosC() >= 160) { carro3->moveTo(22, -5); }
+		if(carro1->getPosC() <= -5) { carro1->moveTo(31, 160); }
+		if(carro2->getPosC() <= -5) { carro2->moveTo(31, 160); }
+		if(carro3->getPosC() <= -5) { carro3->moveTo(31, 160); }
 
-		// if(caminhao1->getPosC() <= 1) { caminhao1->moveTo(30, 160); }
-		// if(caminhao2->getPosC() <= 1) { caminhao2->moveTo(30, 160); }
+		if(caminhao1->getPosC() >= 160) { caminhao1->moveTo(28, 1); }
+		if(caminhao2->getPosC() >= 160) { caminhao2->moveTo(28, 1); }
 		
 		// if(troncoG1->getPosC() <= -28) { troncoG1->moveTo(14, 160); }
 		// if(troncoG2->getPosC() <= -28) { troncoG2->moveTo(14, 160); }
