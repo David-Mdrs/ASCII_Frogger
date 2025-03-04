@@ -53,7 +53,7 @@ void FaseLevel2::init() {
 
 	centroFrogger = new ObjetoDeJogo("centroFrogger", SpriteBuffer(2, 1), 20, 79);
 	objs.push_back(centroFrogger);
-	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 2, COR::VERDE), 8, 6)); // 35, 77
+	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 2, COR::VERDE), 35, 77));
 	objs.push_back(frogger);
 
 	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, -10), ESQUERDA, 9);
@@ -67,7 +67,7 @@ void FaseLevel2::init() {
 	objs.push_back(caminhao2);
 
     trem = new Trem(ObjetoDeJogo("trem", SpriteAnimado("rsc/Trem.anm", 4, COR::BRANCA), 20, -25), DIREITA);
-	//objs.push_back(trem);
+	objs.push_back(trem);
 
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 0));
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 160));
@@ -106,7 +106,7 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 		if(caminhao2->getPosC() >= 160) { caminhao2->moveTo(28, 1); }
 		
 		if(trem->getPosC() >= 160) { trem->moveTo(20, -27); }
-        // if(frogger->getPosL() == 20) { trem->setAtivo(true); }
+        if(frogger->getPosL() == 20) { trem->setAtivo(true); }
 
 		// Primeira linha da água
 		if(troncoP1->getPosC() <= -15) { troncoP1->moveTo(11, 160); }
