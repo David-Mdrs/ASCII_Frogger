@@ -4,16 +4,18 @@
 #include "../ASCII_Engine/Cores.hpp"
 
 void FaseStart::init() {
-	objs.push_back(new ObjetoDeJogo("frogger", Sprite("rsc/Start/Contorno.txt", COR::VERDE), 1, 35));
-	objs.push_back(new ObjetoDeJogo("olhoesq", Sprite("rsc/Start/Olho.txt", COR::BRANCA), 8, 80));
-	objs.push_back(new ObjetoDeJogo("olhodir", Sprite("rsc/Start/Olho.txt", COR::BRANCA), 8, 106));
-    objs.push_back(new ObjetoDeJogo("boca", Sprite("rsc/Start/Boca.txt", COR::MARROM), 19, 58));
-    objs.push_back(new ObjetoDeJogo("lingua", Sprite("rsc/Start/Lingua.txt", COR::VERMELHA), 22, 69));
+	objs.push_back(new ObjetoDeJogo("frogger", Sprite("rsc/Design/Contorno.txt", COR::VERDE), 1, 35));
+	objs.push_back(new ObjetoDeJogo("olhoesq", Sprite("rsc/Design/Olho.txt", COR::BRANCA), 8, 80));
+	objs.push_back(new ObjetoDeJogo("olhodir", Sprite("rsc/Design/Olho.txt", COR::BRANCA), 8, 106));
+    objs.push_back(new ObjetoDeJogo("boca", Sprite("rsc/Design/Boca.txt", COR::MARROM), 19, 58));
+    objs.push_back(new ObjetoDeJogo("lingua", Sprite("rsc/Design/Lingua.txt", COR::VERMELHA), 22, 69));
 
-    texto = new ObjetoDeJogo("texto", Sprite("rsc/Start/Texto.txt", COR::BRANCA), 33, 20);
+    texto = new ObjetoDeJogo("texto", Sprite("rsc/Design/Texto.txt", COR::BRANCA), 33, 20);
 	objs.push_back(texto);
-	objs.push_back(new ObjetoDeJogo("continuar",TextSprite("Pressione ENTER"), 3, 20));
-    objs.push_back(new ObjetoDeJogo("continuar",TextSprite("para continuar !!"), 4, 20));
+	objs.push_back(new ObjetoDeJogo("continuar",TextSprite("Pressione ENTER"), 2, 20));
+    objs.push_back(new ObjetoDeJogo("continuar",TextSprite("para continuar!!"), 3, 20));
+    objs.push_back(new ObjetoDeJogo("continuar",TextSprite("Pressione Q para sair!!"), 5, 15));
+
 
     sapo1 = new ObjetoDeJogo("sapo1", SpriteAnimado("rsc/Frogger.anm", 1, COR::VERDE), 6, 25);
 	objs.push_back(sapo1);

@@ -1,20 +1,21 @@
-#include "FaseFinal.hpp"
+#include "FaseGameOver.hpp"
 
 #include "../ASCII_Engine/input/Keyboard.hpp"
 #include "../ASCII_Engine/Cores.hpp"
 
-void FaseFinal::init() {
+void FaseGameOver::init() {
 	objs.push_back(new ObjetoDeJogo("frogger", Sprite("rsc/Design/Contorno.txt", COR::VERDE), 1, 35));
 	objs.push_back(new ObjetoDeJogo("olhoesq", Sprite("rsc/Design/Olho.txt", COR::BRANCA), 8, 80));
 	objs.push_back(new ObjetoDeJogo("olhodir", Sprite("rsc/Design/Olho.txt", COR::BRANCA), 8, 106));
     objs.push_back(new ObjetoDeJogo("boca", Sprite("rsc/Design/Boca.txt", COR::MARROM), 19, 58));
     objs.push_back(new ObjetoDeJogo("lingua", Sprite("rsc/Design/Lingua.txt", COR::VERMELHA), 22, 69));
 
-    fimJogo = new ObjetoDeJogo("fimJogo", Sprite("rsc/Design/FimDeJogo.txt", COR::BRANCA), 33, 30);
-	objs.push_back(fimJogo);
-	objs.push_back(new ObjetoDeJogo("continuar",TextSprite("Pressione ENTER para"), 2, 18));
-    objs.push_back(new ObjetoDeJogo("continuar",TextSprite("jogar novamente!!"), 3, 20));
+    gameOver = new ObjetoDeJogo("gameOver", Sprite("rsc/Design/GameOver.txt", COR::BRANCA), 33, 30);
+	objs.push_back(gameOver);
+	objs.push_back(new ObjetoDeJogo("continuar",TextSprite("Pressione ENTER"), 2, 20));
+    objs.push_back(new ObjetoDeJogo("continuar",TextSprite("para continuar!!"), 3, 20));
     // objs.push_back(new ObjetoDeJogo("continuar",TextSprite("Pressione Q para sair!!"), 5, 15));
+
 
     sapo1 = new ObjetoDeJogo("sapo1", SpriteAnimado("rsc/Frogger.anm", 1, COR::VERDE), 6, 25);
 	objs.push_back(sapo1);
@@ -24,7 +25,7 @@ void FaseFinal::init() {
     objs.push_back(new ObjetoDeJogo("github",TextSprite("@GitHub/David-Mdrs"), 3, 129));
 }
 
-unsigned FaseFinal::run(SpriteBuffer &screen) {
+unsigned FaseGameOver::run(SpriteBuffer &screen) {
 	std::string ent;
 	
 	//padrão
@@ -41,10 +42,10 @@ unsigned FaseFinal::run(SpriteBuffer &screen) {
 	while (true) {
 
         // Animando nome
-        if (fimJogo->getPosC() == 30)
-            fimJogo->moveRight(1);
+        if (gameOver->getPosC() == 30)
+            gameOver->moveRight(1);
         else
-            fimJogo->moveLeft(1);
+            gameOver->moveLeft(1);
 
         // Analisando posição dos froggers
         if (sapo1->getPosL() == 6)

@@ -13,7 +13,7 @@ public:
 private:	
     ObjetoDeJogo *sapo1;
     ObjetoDeJogo *sapo2;
-    ObjetoDeJogo *texto;
+    ObjetoDeJogo *fimJogo;
 	enum {RIDING, PRACING, END};
 };
 
