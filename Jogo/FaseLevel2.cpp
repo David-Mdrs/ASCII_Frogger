@@ -111,8 +111,8 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 		// Primeira linha da água
 		if(troncoP1->getPosC() <= -15) { troncoP1->moveTo(11, 160); }
 		if(troncoP2->getPosC() <= -15) { troncoP2->moveTo(11, 160); }
-		if(planta1->getPosC() <= -15) { planta1->moveTo(11, 160); }
-		if(planta2->getPosC() <= -15) { planta2->moveTo(11, 160); }
+		if(planta1->getPosC() <= -15) { planta1->moveTo(planta1->getPosL(), 160); }
+		if(planta2->getPosC() <= -15) { planta2->moveTo(planta2->getPosL(), 160); }
 
 		// Segunda linha da água
 		if(troncoG1->getPosC() >= 159) { troncoG1->moveTo(14, -49); }
@@ -121,8 +121,13 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 		// Terceira linha da água
 		if(troncoP3->getPosC() <= -15) { troncoP3->moveTo(17, 160); }
 		if(troncoP4->getPosC() <= -15) { troncoP4->moveTo(17, 160); }
-		if(planta3->getPosC() <= -15) { planta3->moveTo(17, 160); }
-		if(planta4->getPosC() <= -15) { planta4->moveTo(17, 160); }
+		if(planta3->getPosC() <= -15) { planta3->moveTo(planta3->getPosL(), 160); }
+		if(planta4->getPosC() <= -15) { planta4->moveTo(planta4->getPosL(), 160); }
+
+		if (planta1->getContador() == 15) { planta1->moveTo(45, 160); }
+		if (planta2->getContador() == 15) { planta2->moveTo(45, 160); }
+		if (planta3->getContador() == 15) { planta3->moveTo(45, 160); }
+		if (planta4->getContador() == 15) { planta4->moveTo(45, 160); }
 
 		// Lendo entrada
 		char ent = Keyboard::read();
@@ -181,13 +186,19 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 				planta4->setAtivo(true);
 
 			else if (centroFrogger->colideCom(*troncoG1) || centroFrogger->colideCom(*troncoG2))
-					frogger->moveRight(2);
+				frogger->moveRight(3);
 			else if (centroFrogger->colideCom(*troncoP3) || centroFrogger->colideCom(*troncoP4))
-					frogger->moveLeft(2);
+				frogger->moveLeft(2);
 			else {
-					frogger->perderVida();
-					frogger->moveTo(35, 77);
-					vida->setText(std::string(frogger->getVida(), '#'));
+				frogger->perderVida();
+				frogger->moveTo(35, 77);
+				vida->setText(std::string(frogger->getVida(), '#'));
+			}
+
+			if (frogger->getPosC() <= 5) {
+				frogger->moveRight(3);
+			} else if (frogger->getPosC() >= 156) {
+				frogger->moveLeft(3);
 			}
 			centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
 		}

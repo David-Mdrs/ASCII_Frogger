@@ -22,7 +22,7 @@ public:
             this->moveRight(getVelocidade());
         }
 
-        if (getAtivo() && getContador() < 5) {
+        if (getAtivo() && getContador() < 15) {
             setContador();
         }
     }
