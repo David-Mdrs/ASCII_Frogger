@@ -53,7 +53,7 @@ void FaseLevel2::init() {
 	caminhao2 = new Caminhao(ObjetoDeJogo("caminhao", SpriteAnimado("rsc/CaminhaoDir.anm", 5, COR::LARANJA), 28, 160), DIREITA, 14);
 	objs.push_back(caminhao2);
 
-    trem = new Trem(ObjetoDeJogo("trem", SpriteAnimado("rsc/Trem.anm", 5, COR::BRANCA), 20, -25), DIREITA);
+    trem = new Trem(ObjetoDeJogo("trem", SpriteAnimado("rsc/Trem.anm", 4, COR::BRANCA), 20, -25), DIREITA);
 	objs.push_back(trem);
 
 	objs.push_back(new ObjetoDeJogo("parede", Sprite("rsc/Parede.txt", COR::VERDE), 7, 0));
@@ -127,9 +127,10 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 		// Redefinindo centro do frogger
 		centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
 		
-		// Colisão com carros e caminhões
+		// Colisão com carros, caminhões e trem
 		if (frogger->colideComBordas(*carro1) || frogger->colideComBordas(*carro2) ||
-			frogger->colideComBordas(*caminhao1) || frogger->colideComBordas(*caminhao2)) {
+			frogger->colideComBordas(*caminhao1) || frogger->colideComBordas(*caminhao2) ||
+            frogger->colideComBordas(*trem)) {
 				frogger->perderVida();
 				frogger->moveTo(35, 77);
 				vida->setText(std::string(frogger->getVida(), '#'));
