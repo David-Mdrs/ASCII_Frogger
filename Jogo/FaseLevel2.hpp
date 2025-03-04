@@ -10,6 +10,7 @@
 #include "Trem.hpp"
 #include "Frogger.hpp"
 #include "Plataforma.hpp"
+#include "Planta.hpp"
 
 class FaseLevel2 : public Fase {
 public:
@@ -37,12 +38,18 @@ private:
 
     Trem *trem;
 
+	Planta *planta1;
+	Planta *planta2;
+	Planta *planta3;
+	Planta *planta4;
+
 	Plataforma *troncoG1;
 	Plataforma *troncoG2;
-	Plataforma *troncoG3;
 
 	Plataforma *troncoP1;
 	Plataforma *troncoP2;
+	Plataforma *troncoP3;
+	Plataforma *troncoP4;
 
 	ObjetoDeJogo *muro1;
 	ObjetoDeJogo *muro2;
