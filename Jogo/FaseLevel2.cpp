@@ -53,7 +53,7 @@ void FaseLevel2::init() {
 
 	centroFrogger = new ObjetoDeJogo("centroFrogger", SpriteBuffer(2, 1), 20, 79);
 	objs.push_back(centroFrogger);
-	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 2, COR::VERDE), 22, 77)); // 35, 77
+	frogger = new Frogger(ObjetoDeJogo("frogger", SpriteAnimado("rsc/Frogger.anm", 2, COR::VERDE), 8, 6)); // 35, 77
 	objs.push_back(frogger);
 
 	carro1 = new Movimentavel(ObjetoDeJogo("carro", SpriteAnimado("rsc/CarroEsq.anm", 5, COR::MAGENTA), 31, -10), ESQUERDA, 9);
@@ -83,7 +83,7 @@ void FaseLevel2::init() {
 	muro5 = new ObjetoDeJogo("muro", Sprite("rsc/Muro.txt", COR::VERDE), 7, 131);
 	objs.push_back(muro5);
 
-	objs.push_back(new ObjetoDeJogo("fase",TextSprite("02"), 3, 84));
+	objs.push_back(new ObjetoDeJogo("fase",TextSprite("02"), 3, 127));
 	objs.push_back(new ObjetoDeJogo("vida",TextSprite("###"), 3, 41));
 	SpriteBase *tmp = const_cast<SpriteBase*> (objs.back()->getSprite());
 	vida = dynamic_cast<TextSprite*> (tmp);
@@ -164,17 +164,6 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 		}
 		// Colisão com água
 		if (centroFrogger->getPosL() > 10 && centroFrogger->getPosL() < 20) {
-			if (centroFrogger->colideCom(*troncoP1) || centroFrogger->colideCom(*troncoP2) ||
-				centroFrogger->colideCom(*planta1) || centroFrogger->colideCom(*planta2)) {			
-				if(frogger->colideCom(*muro1) || frogger->colideCom(*muro2) || frogger->colideCom(*muro3) || frogger->colideCom(*muro4) || frogger->colideCom(*muro5)) {
-					frogger->moveRight(2);
-				} else {
-					frogger->moveLeft(2);
-				}
-			}
-
-			if (centroFrogger->colideCom(*planta3) || centroFrogger->colideCom(*planta4))
-				frogger->moveLeft(2);
 	
 			if (centroFrogger->colideCom(*planta1))
 				planta1->setAtivo(true);
@@ -185,6 +174,16 @@ unsigned FaseLevel2::run(SpriteBuffer &screen) {
 			else if (centroFrogger->colideCom(*planta4))
 				planta4->setAtivo(true);
 
+			if (centroFrogger->colideCom(*troncoP1) || centroFrogger->colideCom(*troncoP2) ||
+				centroFrogger->colideCom(*planta1) || centroFrogger->colideCom(*planta2)) {			
+				if(frogger->colideCom(*muro1) || frogger->colideCom(*muro2) || frogger->colideCom(*muro3) || frogger->colideCom(*muro4) || frogger->colideCom(*muro5)) {
+					frogger->moveRight(2);
+				} else {
+					frogger->moveLeft(2);
+				}
+			}
+			else if (centroFrogger->colideCom(*planta3) || centroFrogger->colideCom(*planta4))
+				frogger->moveLeft(2);
 			else if (centroFrogger->colideCom(*troncoG1) || centroFrogger->colideCom(*troncoG2))
 				frogger->moveRight(3);
 			else if (centroFrogger->colideCom(*troncoP3) || centroFrogger->colideCom(*troncoP4))

@@ -66,7 +66,7 @@ void FaseLevel1::init() {
 	muro5 = new ObjetoDeJogo("muro", Sprite("rsc/Muro.txt", COR::VERDE), 7, 131);
 	objs.push_back(muro5);
 
-	objs.push_back(new ObjetoDeJogo("fase",TextSprite("01"), 3, 84));
+	objs.push_back(new ObjetoDeJogo("fase",TextSprite("01"), 3, 127));
 	objs.push_back(new ObjetoDeJogo("vida",TextSprite("###"), 3, 41));
 	SpriteBase *tmp = const_cast<SpriteBase*> (objs.back()->getSprite());
 	vida = dynamic_cast<TextSprite*> (tmp);
@@ -117,9 +117,6 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		}
 		else if (ent == 'q')
 			return Fase::END_GAME;
-
-		// Redefinindo centro do frogger
-		centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
 		
 		// Colisão com carros e caminhões
 		if (frogger->colideComBordas(*carro1) || frogger->colideComBordas(*carro2) || frogger->colideComBordas(*carro3) ||
@@ -132,20 +129,27 @@ unsigned FaseLevel1::run(SpriteBuffer &screen) {
 		if (centroFrogger->getPosL() > 10 && centroFrogger->getPosL() < 17) {
 			if (centroFrogger->colideCom(*troncoG1) || centroFrogger->colideCom(*troncoG2) || centroFrogger->colideCom(*troncoG3)) {
 				frogger->moveLeft(5);
-				centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
 			} else if (centroFrogger->colideCom(*troncoP1) || centroFrogger->colideCom(*troncoP2)) {
 				if(frogger->colideCom(*muro1) || frogger->colideCom(*muro2) || frogger->colideCom(*muro3) || frogger->colideCom(*muro4) || frogger->colideCom(*muro5)) {
-					frogger->moveLeft(2);
-				} else { frogger->moveRight(3);
-					centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
+					frogger->moveLeft(5);
+				} else {
+					frogger->moveRight(3);
 				}
 			} else {
 				frogger->perderVida();
 				frogger->moveTo(35, 77);
 				vida->setText(std::string(frogger->getVida(), '#'));
 			}
+
+			if (frogger->getPosC() <= 3) {
+				frogger->moveRight(5);
+			} else if (frogger->getPosC() >= 156) {
+				frogger->moveLeft(5);
+			}
 		}
 	
+		// Redefinindo centro do frogger
+		centroFrogger->moveTo(frogger->getPosL()+1, frogger->getPosC()+2);
 
 		// Padrão
 		update();
