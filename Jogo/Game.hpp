@@ -17,6 +17,10 @@ public:
 	~Game() {}
 	
 	static void run() {
+
+		Sound musica("rsc/Sons/musica_fundo.mp3");
+		musica.playloop();
+
 		SpriteBuffer screen(165, 41);
 	
 		FaseStart start("FaseStart", screen);
