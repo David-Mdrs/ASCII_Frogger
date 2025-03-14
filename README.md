@@ -6,6 +6,21 @@ Para esse projeto, desenvolvi um jogo de terminal baseado na engine `Cpp-ASCII-G
 
 Com um tema livre, escolhi recriar um clássico: `Frogger`, originalmente lançado para `Atari`. O resultado foi o `ASCII Frogger`, uma versão em ASCII do jogo que traz desafios nostálgicos em um ambiente totalmente baseado em texto.
 
+# 📚 Instruções
+
+A aplicação foi desenvolvido para ser executado em `sistemas Linux`. Certifique-se de estar utilizando um ambiente Linux para rodar o jogo corretamente. 
+
+O jogo foi desenvolvido na `linguagem de programação C++` e requer o `compilador g++` para ser executado. Você pode instalar o g++ no Linux com o seguinte comando:
+```bash
+sudo apt install g++
+```
+Após atender a essas especificações, clone o repositório, acesse o diretório do projeto e execute o arquivo makeplay, respectivamente:
+```bash
+git clone https://github.com/David-Mdrs/ASCII_Frogger.git
+cd .../ASCII_Frogger
+./makeplay
+```
+
 ## 🛠️ Contribuições
 
 Para contribuir com `<ASCII_Frogger>`, siga estas etapas:
