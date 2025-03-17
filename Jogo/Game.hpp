@@ -51,6 +51,7 @@ public:
 			gameOver.init();
 			gameOver.run(screen);
 		}
+		musica.stop();
 	}
 };
 
